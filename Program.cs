@@ -15,7 +15,7 @@ namespace AequinoctiumBot
     class Program
     {
         //Variables
-        public static readonly string botName = "Drak 2.0";
+        public static readonly string botName = "Aequinoctium Bot";
         public static readonly string prefixString = "aq ";
         public DiscordSocketClient client;
         public static SocketGuild guild;
@@ -42,7 +42,9 @@ namespace AequinoctiumBot
             commandHandler = new CommandHandler(client, commandService, serviceProvider);
             eventHandler = new EventHandler(client, serviceProvider);
 
-            await client.LoginAsync(TokenType.Bot, "NTYyNjgzOTk3MjUyMDkxOTQ0.XKObJQ.aDPZ79ROVAMB_dBaD8jyZCL24Hg", true);
+            string AuthToken = File.ReadAllText(AppDomain.CurrentDomain.BaseDirectory + "authkey.secret");
+            await client.LoginAsync(TokenType.Bot, AuthToken, true);
+            
 
             await client.StartAsync();
             await client.SetGameAsync("Aequinoctium");
