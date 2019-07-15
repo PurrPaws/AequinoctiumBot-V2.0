@@ -63,6 +63,11 @@
           "assetTargetFallback": true,
           "warn": true
         }
+      },
+      "runtimes": {
+        "ubuntu.18.04-x64": {
+          "#import": []
+        }
       }
     }
   }

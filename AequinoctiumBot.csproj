@@ -6,6 +6,7 @@
     <StartupObject>AequinoctiumBot.Program</StartupObject>
     <Authors>Ruben Versavel</Authors>
     <TargetLatestRuntimePatch>true</TargetLatestRuntimePatch>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <Product />
   </PropertyGroup>
 
