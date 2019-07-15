@@ -65,7 +65,7 @@ namespace AequinoctiumBot
         [Summary("Links the invite link in the channel you use this command in.\n\u200B")]
         public async Task InviteLink()
         {
-            await ReplyAsync("Server invite link: https://discord.gg/89Cx8aV");
+            await ReplyAsync("Server invite link: https://discord.gg/8ratCZD");
             await Context.Message.DeleteAsync();
         }
 
