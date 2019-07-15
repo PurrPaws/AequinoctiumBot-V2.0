@@ -1,0 +1,20 @@
+﻿Log Messages - Red
+Synchronization - Purple
+Message recieved - Yellow
+
+
+Exp Gains:
+lvl 1-5		+1/10	
+lvl 6-10	+2/10
+lvl 11-15	+3/10
+lvl 15-20	+4/10
+level 21+	Constant - no more increase
+
+10*level + (1/3*[10*level-1]) = ExpReq
+
+REQUIREMENT
+lvl 1	10xp
+lvl 2	(10xp*2) + 1/3(10*1) <=> 21
+lvl 3	10*3 + 1/3(10*2) <=> 32
+lvl 4	10*4 + 1/3(10*3) <=> 43
+lvl 5	10*5 + 1/3(10*4) <=> 54

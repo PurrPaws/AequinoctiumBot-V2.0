@@ -1,0 +1,11 @@
+C:\Users\rvers\OneDrive\AequinoctiumBot\AequinoctiumBot\bin\Debug\netcoreapp2.1\AequinoctiumBot.deps.json
+C:\Users\rvers\OneDrive\AequinoctiumBot\AequinoctiumBot\bin\Debug\netcoreapp2.1\AequinoctiumBot.runtimeconfig.json
+C:\Users\rvers\OneDrive\AequinoctiumBot\AequinoctiumBot\bin\Debug\netcoreapp2.1\AequinoctiumBot.runtimeconfig.dev.json
+C:\Users\rvers\OneDrive\AequinoctiumBot\AequinoctiumBot\bin\Debug\netcoreapp2.1\AequinoctiumBot.dll
+C:\Users\rvers\OneDrive\AequinoctiumBot\AequinoctiumBot\bin\Debug\netcoreapp2.1\AequinoctiumBot.pdb
+C:\Users\rvers\OneDrive\AequinoctiumBot\AequinoctiumBot\obj\Debug\netcoreapp2.1\AequinoctiumBot.csprojAssemblyReference.cache
+C:\Users\rvers\OneDrive\AequinoctiumBot\AequinoctiumBot\obj\Debug\netcoreapp2.1\AequinoctiumBot.csproj.CoreCompileInputs.cache
+C:\Users\rvers\OneDrive\AequinoctiumBot\AequinoctiumBot\obj\Debug\netcoreapp2.1\AequinoctiumBot.AssemblyInfoInputs.cache
+C:\Users\rvers\OneDrive\AequinoctiumBot\AequinoctiumBot\obj\Debug\netcoreapp2.1\AequinoctiumBot.AssemblyInfo.cs
+C:\Users\rvers\OneDrive\AequinoctiumBot\AequinoctiumBot\obj\Debug\netcoreapp2.1\AequinoctiumBot.dll
+C:\Users\rvers\OneDrive\AequinoctiumBot\AequinoctiumBot\obj\Debug\netcoreapp2.1\AequinoctiumBot.pdb

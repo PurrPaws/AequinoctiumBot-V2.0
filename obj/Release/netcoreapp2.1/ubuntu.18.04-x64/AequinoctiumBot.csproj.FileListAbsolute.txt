@@ -1,0 +1,14 @@
+C:\Users\rvers\OneDrive\AequinoctiumBot\AequinoctiumBot\bin\Release\netcoreapp2.1\ubuntu.18.04-x64\libhostpolicy.so
+C:\Users\rvers\OneDrive\AequinoctiumBot\AequinoctiumBot\bin\Release\netcoreapp2.1\ubuntu.18.04-x64\libhostfxr.so
+C:\Users\rvers\OneDrive\AequinoctiumBot\AequinoctiumBot\bin\Release\netcoreapp2.1\ubuntu.18.04-x64\AequinoctiumBot
+C:\Users\rvers\OneDrive\AequinoctiumBot\AequinoctiumBot\bin\Release\netcoreapp2.1\ubuntu.18.04-x64\AequinoctiumBot.deps.json
+C:\Users\rvers\OneDrive\AequinoctiumBot\AequinoctiumBot\bin\Release\netcoreapp2.1\ubuntu.18.04-x64\AequinoctiumBot.runtimeconfig.json
+C:\Users\rvers\OneDrive\AequinoctiumBot\AequinoctiumBot\bin\Release\netcoreapp2.1\ubuntu.18.04-x64\AequinoctiumBot.runtimeconfig.dev.json
+C:\Users\rvers\OneDrive\AequinoctiumBot\AequinoctiumBot\bin\Release\netcoreapp2.1\ubuntu.18.04-x64\AequinoctiumBot.dll
+C:\Users\rvers\OneDrive\AequinoctiumBot\AequinoctiumBot\bin\Release\netcoreapp2.1\ubuntu.18.04-x64\AequinoctiumBot.pdb
+C:\Users\rvers\OneDrive\AequinoctiumBot\AequinoctiumBot\obj\Release\netcoreapp2.1\ubuntu.18.04-x64\AequinoctiumBot.csprojAssemblyReference.cache
+C:\Users\rvers\OneDrive\AequinoctiumBot\AequinoctiumBot\obj\Release\netcoreapp2.1\ubuntu.18.04-x64\AequinoctiumBot.csproj.CoreCompileInputs.cache
+C:\Users\rvers\OneDrive\AequinoctiumBot\AequinoctiumBot\obj\Release\netcoreapp2.1\ubuntu.18.04-x64\AequinoctiumBot.AssemblyInfoInputs.cache
+C:\Users\rvers\OneDrive\AequinoctiumBot\AequinoctiumBot\obj\Release\netcoreapp2.1\ubuntu.18.04-x64\AequinoctiumBot.AssemblyInfo.cs
+C:\Users\rvers\OneDrive\AequinoctiumBot\AequinoctiumBot\obj\Release\netcoreapp2.1\ubuntu.18.04-x64\AequinoctiumBot.dll
+C:\Users\rvers\OneDrive\AequinoctiumBot\AequinoctiumBot\obj\Release\netcoreapp2.1\ubuntu.18.04-x64\AequinoctiumBot.pdb
