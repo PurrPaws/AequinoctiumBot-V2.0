@@ -118,19 +118,21 @@ namespace AequinoctiumBot
 
         public Task Client_UserJoined(SocketGuildUser user)
         {
-            if (user.Nickname != "")
+            if (user.Nickname.Length > 0)
                 Program.LogConsole("JOINLEAVEHANDLE", ConsoleColor.Cyan, $"User: {user.Nickname} has joined the Server.");
             else
                 Program.LogConsole("JOINLEAVEHANDLE", ConsoleColor.Cyan, $"User: {user.Username} has joined the Server.");
 
             UserDataService.On_UserJoined(user);
 
+            user.SendMessageAsync("Hello and welcome to Aequinoctium!\nOur Discord server has been hacked and all previous data has been lost. To accommodate for the inconvenience new members will be granted 10 levels and 100 Drak on joining.\nWe resolved the matter as quickly as possible and are sorry for the inconvenience this may have caused.\n\n*This ends Sunday 21/07/2019*\n\n**Ru.**");
+
             return Task.CompletedTask;
         }
 
         public Task Client_UserLeft(SocketGuildUser user)
         {
-            if (user.Nickname != "")
+            if (user.Nickname.Length > 0)
                 Program.LogConsole("JOINLEAVEHANDLE", ConsoleColor.Cyan, $"User: {user.Nickname} has left the Server.");
             else
                 Program.LogConsole("JOINLEAVEHANDLE", ConsoleColor.Cyan, $"User: {user.Username} has left the Server.");

@@ -377,6 +377,9 @@ namespace AequinoctiumBot
         {
             UserDataSet newUserData = new UserDataSet();
             newUserData.Initialize(user.Id);
+            newUserData.drak = 100; //TODO: remove when event ends!
+            newUserData.experience = 213; //TODO: remove when event ends!
+            newUserData.level = 10; //TODO: remove when event ends!
             UserData.Add(newUserData);
             SaveData();
         }
