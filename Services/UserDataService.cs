@@ -376,10 +376,7 @@ namespace AequinoctiumBot
         public static void On_UserJoined(SocketGuildUser user)
         {
             UserDataSet newUserData = new UserDataSet();
-            newUserData.Initialize(user.Id);
-            newUserData.drak = 100; //TODO: remove when event ends!
-            newUserData.experience = 213; //TODO: remove when event ends!
-            newUserData.level = 10; //TODO: remove when event ends!
+            newUserData.Initialize(user.Id, 10, 213f, 100f); //TODO: remove values when event ends!
             UserData.Add(newUserData);
             SaveData();
         }
@@ -433,9 +430,12 @@ namespace AequinoctiumBot
         public bool FirstMessageOfDay = false;
         public bool FirstConnectionToVoiceOfDay = false;
 
-        public void Initialize(ulong _userID)
+        public void Initialize(ulong _userID, int _level = 1, float _experience = 0, float _drak = 0)
         {
             userID = _userID;
+            level = _level;
+            experience = _experience;
+            drak = _drak;
         }
     }
     [Serializable]

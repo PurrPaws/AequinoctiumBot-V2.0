@@ -118,10 +118,15 @@ namespace AequinoctiumBot
 
         public Task Client_UserJoined(SocketGuildUser user)
         {
-            if (user.Nickname.Length > 0)
+            if (user.Nickname != null)
+            {
                 Program.LogConsole("JOINLEAVEHANDLE", ConsoleColor.Cyan, $"User: {user.Nickname} has joined the Server.");
+            } 
             else
+            {
                 Program.LogConsole("JOINLEAVEHANDLE", ConsoleColor.Cyan, $"User: {user.Username} has joined the Server.");
+            }
+                
 
             UserDataService.On_UserJoined(user);
 
@@ -132,7 +137,7 @@ namespace AequinoctiumBot
 
         public Task Client_UserLeft(SocketGuildUser user)
         {
-            if (user.Nickname.Length > 0)
+            if (user.Nickname != null)
                 Program.LogConsole("JOINLEAVEHANDLE", ConsoleColor.Cyan, $"User: {user.Nickname} has left the Server.");
             else
                 Program.LogConsole("JOINLEAVEHANDLE", ConsoleColor.Cyan, $"User: {user.Username} has left the Server.");

@@ -1,0 +1,10 @@
+G:\Visual Studio Projects\AequinoctiumBot\AequinoctiumBot\bin\Debug\netcoreapp2.1\authkey.secret
+G:\Visual Studio Projects\AequinoctiumBot\AequinoctiumBot\bin\Debug\netcoreapp2.1\AequinoctiumBot.deps.json
+G:\Visual Studio Projects\AequinoctiumBot\AequinoctiumBot\bin\Debug\netcoreapp2.1\AequinoctiumBot.runtimeconfig.json
+G:\Visual Studio Projects\AequinoctiumBot\AequinoctiumBot\bin\Debug\netcoreapp2.1\AequinoctiumBot.runtimeconfig.dev.json
+G:\Visual Studio Projects\AequinoctiumBot\AequinoctiumBot\bin\Debug\netcoreapp2.1\AequinoctiumBot.dll
+G:\Visual Studio Projects\AequinoctiumBot\AequinoctiumBot\bin\Debug\netcoreapp2.1\AequinoctiumBot.pdb
+G:\Visual Studio Projects\AequinoctiumBot\AequinoctiumBot\obj\Debug\netcoreapp2.1\AequinoctiumBot.csprojAssemblyReference.cache
+G:\Visual Studio Projects\AequinoctiumBot\AequinoctiumBot\obj\Debug\netcoreapp2.1\AequinoctiumBot.csproj.CoreCompileInputs.cache
+G:\Visual Studio Projects\AequinoctiumBot\AequinoctiumBot\obj\Debug\netcoreapp2.1\AequinoctiumBot.dll
+G:\Visual Studio Projects\AequinoctiumBot\AequinoctiumBot\obj\Debug\netcoreapp2.1\AequinoctiumBot.pdb
