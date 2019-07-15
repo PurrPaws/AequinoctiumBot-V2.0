@@ -12,3 +12,18 @@ C:\Users\rvers\OneDrive\AequinoctiumBot\AequinoctiumBot\obj\Release\netcoreapp2.
 C:\Users\rvers\OneDrive\AequinoctiumBot\AequinoctiumBot\obj\Release\netcoreapp2.1\ubuntu.18.04-x64\AequinoctiumBot.AssemblyInfo.cs
 C:\Users\rvers\OneDrive\AequinoctiumBot\AequinoctiumBot\obj\Release\netcoreapp2.1\ubuntu.18.04-x64\AequinoctiumBot.dll
 C:\Users\rvers\OneDrive\AequinoctiumBot\AequinoctiumBot\obj\Release\netcoreapp2.1\ubuntu.18.04-x64\AequinoctiumBot.pdb
+G:\Visual Studio Projects\AequinoctiumBot\AequinoctiumBot\bin\Release\netcoreapp2.1\ubuntu.18.04-x64\AequinoctiumBot
+G:\Visual Studio Projects\AequinoctiumBot\AequinoctiumBot\bin\Release\netcoreapp2.1\ubuntu.18.04-x64\AuthKey.secret
+G:\Visual Studio Projects\AequinoctiumBot\AequinoctiumBot\bin\Release\netcoreapp2.1\ubuntu.18.04-x64\libhostpolicy.so
+G:\Visual Studio Projects\AequinoctiumBot\AequinoctiumBot\bin\Release\netcoreapp2.1\ubuntu.18.04-x64\libhostfxr.so
+G:\Visual Studio Projects\AequinoctiumBot\AequinoctiumBot\bin\Release\netcoreapp2.1\ubuntu.18.04-x64\AequinoctiumBot.deps.json
+G:\Visual Studio Projects\AequinoctiumBot\AequinoctiumBot\bin\Release\netcoreapp2.1\ubuntu.18.04-x64\AequinoctiumBot.runtimeconfig.json
+G:\Visual Studio Projects\AequinoctiumBot\AequinoctiumBot\bin\Release\netcoreapp2.1\ubuntu.18.04-x64\AequinoctiumBot.runtimeconfig.dev.json
+G:\Visual Studio Projects\AequinoctiumBot\AequinoctiumBot\bin\Release\netcoreapp2.1\ubuntu.18.04-x64\AequinoctiumBot.dll
+G:\Visual Studio Projects\AequinoctiumBot\AequinoctiumBot\bin\Release\netcoreapp2.1\ubuntu.18.04-x64\AequinoctiumBot.pdb
+G:\Visual Studio Projects\AequinoctiumBot\AequinoctiumBot\obj\Release\netcoreapp2.1\ubuntu.18.04-x64\AequinoctiumBot.csprojAssemblyReference.cache
+G:\Visual Studio Projects\AequinoctiumBot\AequinoctiumBot\obj\Release\netcoreapp2.1\ubuntu.18.04-x64\AequinoctiumBot.csproj.CoreCompileInputs.cache
+G:\Visual Studio Projects\AequinoctiumBot\AequinoctiumBot\obj\Release\netcoreapp2.1\ubuntu.18.04-x64\AequinoctiumBot.AssemblyInfoInputs.cache
+G:\Visual Studio Projects\AequinoctiumBot\AequinoctiumBot\obj\Release\netcoreapp2.1\ubuntu.18.04-x64\AequinoctiumBot.AssemblyInfo.cs
+G:\Visual Studio Projects\AequinoctiumBot\AequinoctiumBot\obj\Release\netcoreapp2.1\ubuntu.18.04-x64\AequinoctiumBot.dll
+G:\Visual Studio Projects\AequinoctiumBot\AequinoctiumBot\obj\Release\netcoreapp2.1\ubuntu.18.04-x64\AequinoctiumBot.pdb

@@ -8,7 +8,10 @@ namespace AequinoctiumBot
     public class BonusList
     {
         /// <summary>
-        /// Gets or sets the bonus list ID.
+        /// 
+        /// 
+        /// 
+        /// s or sets the bonus list ID.
         /// </summary>
         [JsonProperty("bonusListId")]
         public int BonusListId { get; set; }

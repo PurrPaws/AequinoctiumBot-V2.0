@@ -8,7 +8,10 @@ namespace AequinoctiumBot
     public class Appearance
     {
         /// <summary>
-        /// Gets or sets the enchant display info ID.
+        /// 
+        /// 
+        /// 
+        /// s or sets the enchant display info ID.
         /// </summary>
         [JsonProperty("enchantDisplayInfoId")]
         public int EnchantDisplayInfoId { get; set; }

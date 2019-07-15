@@ -9,7 +9,10 @@ namespace AequinoctiumBot
     public class AzeriteEmpoweredItem
     {
         /// <summary>
-        /// Gets or sets the Azerite powers.
+        /// 
+        /// 
+        /// 
+        /// s or sets the Azerite powers.
         /// </summary>
         [JsonProperty("azeritePowers")]
         public IList<AzeritePower> AzeritePowers { get; set; }

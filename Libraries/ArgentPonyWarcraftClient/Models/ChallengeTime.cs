@@ -5,7 +5,10 @@ namespace AequinoctiumBot
     /// <summary>
     /// The time for a challenge mode dungeon.
     /// </summary>
-    public class ChallengeTime
+    public class Challen
+        
+        
+        ime
     {
         /// <summary>
         /// Gets or sets the time.

@@ -8,7 +8,10 @@ namespace AequinoctiumBot
     public class AzeritePower
     {
         /// <summary>
-        /// Gets or sets the ID.
+        /// 
+        /// 
+        /// 
+        /// s or sets the ID.
         /// </summary>
         [JsonProperty("id")]
         public int Id { get; set; }

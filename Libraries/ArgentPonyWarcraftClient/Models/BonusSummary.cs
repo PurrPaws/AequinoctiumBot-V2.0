@@ -9,7 +9,10 @@ namespace AequinoctiumBot
     public class BonusSummary
     {
         /// <summary>
-        /// Gets or sets the default bonus lists.
+        /// 
+        /// 
+        /// 
+        /// s or sets the default bonus lists.
         /// </summary>
         [JsonProperty("defaultBonusLists")]
         public IList<int> DefaultBonusLists { get; set; }

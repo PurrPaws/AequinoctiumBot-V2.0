@@ -9,7 +9,9 @@ namespace AequinoctiumBot
     public class Audit
     {
         /// <summary>
-        /// Gets or sets the number of issues.
+        /// 
+        /// 
+        /// s or sets the number of issues.
         /// </summary>
         [JsonProperty("numberOfIssues")]
         public int NumberOfIssues { get; set; }

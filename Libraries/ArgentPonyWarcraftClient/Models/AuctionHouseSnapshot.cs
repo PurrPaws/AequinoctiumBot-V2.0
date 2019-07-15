@@ -9,7 +9,9 @@ namespace AequinoctiumBot
     public class AuctionHouseSnapshot
     {
         /// <summary>
-        /// Gets or sets the realms with access to these auctions.
+        /// 
+        /// 
+        /// s or sets the realms with access to these auctions.
         /// </summary>
         [JsonProperty("realms")]
         public IList<AuctionRealm> Realms { get; set; }

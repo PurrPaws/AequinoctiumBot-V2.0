@@ -15,7 +15,7 @@ namespace AequinoctiumBot
     public class UserDataService
     {
         public static List<UserDataSet> UserData = new List<UserDataSet>();
-        readonly static ulong NotifyChannelID = 583623496861745153;
+        readonly static ulong NotifyChannelID = 600385155131113497;
         public static List<IRole> ServerRoles;
 
 
@@ -265,7 +265,7 @@ namespace AequinoctiumBot
             return userDataSet.FirstConnectionToVoiceOfDay;
         }
         //TODO: make Embedd.
-        public static void On_LevelUp(UserDataSet userDataSet) { (Program.guild.GetChannel(596330088258338816) as IMessageChannel).SendMessageAsync($"{Program.guild.GetUser(userDataSet.userID).Mention} has reached level {userDataSet.level}"); userDataSet.drak += 10; Program.guild.GetUser(userDataSet.userID).SendMessageAsync("You've gained 10 Ξ for leveling up!"); }
+        public static void On_LevelUp(UserDataSet userDataSet) { (Program.guild.GetChannel(600380855537500202) as IMessageChannel).SendMessageAsync($"{Program.guild.GetUser(userDataSet.userID).Mention} has reached level {userDataSet.level}"); userDataSet.drak += 10; Program.guild.GetUser(userDataSet.userID).SendMessageAsync("You've gained 10 Ξ for leveling up!"); }
 
         public static float CalculateRequiredExp(int level)
         {

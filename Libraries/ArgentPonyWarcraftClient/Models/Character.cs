@@ -10,7 +10,9 @@ namespace AequinoctiumBot
     public class Character
     {
         /// <summary>
-        /// Gets or sets the achievements.
+        /// 
+        /// 
+        /// s or sets the achievements.
         /// </summary>
         [JsonProperty("achievements")]
         public Achievements Achievements { get; set; }

@@ -8,7 +8,10 @@ namespace AequinoctiumBot
     public class AzeriteItem
     {
         /// <summary>
-        /// Gets or sets the Azerite level.
+        /// 
+        /// 
+        /// 
+        /// s or sets the Azerite level.
         /// </summary>
         [JsonProperty("azeriteLevel")]
         public int AzeriteLevel { get; set; }

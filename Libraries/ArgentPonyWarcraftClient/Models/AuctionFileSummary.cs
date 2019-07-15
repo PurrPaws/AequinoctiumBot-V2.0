@@ -9,7 +9,9 @@ namespace AequinoctiumBot
     public class AuctionFileSummary
     {
         /// <summary>
-        /// Gets or sets the URL for the JSON-formatted auction data file.
+        /// 
+        /// 
+        /// s or sets the URL for the JSON-formatted auction data file.
         /// </summary>
         [JsonProperty("url")]
         public string Url { get; set; }

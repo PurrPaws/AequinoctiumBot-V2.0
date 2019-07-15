@@ -9,7 +9,9 @@ namespace AequinoctiumBot
     public class AuctionFiles
     {
         /// <summary>
-        /// Gets or sets the auction file summaries.
+        /// 
+        /// 
+        /// s or sets the auction file summaries.
         /// </summary>
         [JsonProperty("files")]
         public IList<AuctionFileSummary> Files { get; set; }

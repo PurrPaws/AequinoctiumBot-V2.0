@@ -10,7 +10,9 @@ namespace AequinoctiumBot
     public class Achievements
     {
         /// <summary>
-        /// Gets or sets the IDs of the achievements completed by this character.
+        /// 
+        /// 
+        /// s or sets the IDs of the achievements completed by this character.
         /// </summary>
         [JsonProperty("achievementsCompleted")]
         public IList<int> AchievementsCompleted { get; set; }

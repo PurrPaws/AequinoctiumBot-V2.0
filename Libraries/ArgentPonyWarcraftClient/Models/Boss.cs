@@ -9,7 +9,9 @@ namespace AequinoctiumBot
     public class Boss
     {
         /// <summary>
-        /// Gets a value indicating whether the boss is available in heroic mode.
+        /// 
+        /// 
+        /// s a value indicating whether the boss is available in heroic mode.
         /// </summary>
         [JsonProperty(PropertyName = "availableInHeroicMode")]
         public bool AvailableInHeroicMode { get; private set; }

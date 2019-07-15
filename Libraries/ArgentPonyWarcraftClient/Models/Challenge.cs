@@ -9,7 +9,9 @@ namespace AequinoctiumBot
     public class Challenge
     {
         /// <summary>
-        /// Gets or sets the realm.
+        /// 
+        /// 
+        /// s or sets the realm.
         /// </summary>
         [JsonProperty("realm")]
         public Realm Realm { get; set; }

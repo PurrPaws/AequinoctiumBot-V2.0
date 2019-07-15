@@ -9,7 +9,10 @@ namespace AequinoctiumBot
     public class Auction
     {
         /// <summary>
-        /// Gets or sets the auction ID.
+        /// 
+        /// 
+        /// 
+        /// s or sets the auction ID.
         /// </summary>
         [JsonProperty("auc")]
         public int AuctionId { get; set; }

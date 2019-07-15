@@ -8,7 +8,10 @@ namespace AequinoctiumBot
     public class ArtifactTrait
     {
         /// <summary>
-        /// Gets or sets the artifact trait ID.
+        /// 
+        /// 
+        /// 
+        /// s or sets the artifact trait ID.
         /// </summary>
         [JsonProperty("id")]
         public int Id { get; set; }

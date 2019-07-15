@@ -8,7 +8,9 @@ namespace AequinoctiumBot
     public class AuctionRealm
     {
         /// <summary>
-        /// Gets or sets the realm name.
+        /// 
+        /// 
+        /// s or sets the realm name.
         /// </summary>
         [JsonProperty("name")]
         public string Name { get; set; }

@@ -8,7 +8,11 @@ namespace AequinoctiumBot
     public class Battlegroup
     {
         /// <summary>
-        /// Gets or sets the battlegroup name.
+        /// 
+        /// 
+        /// 
+        /// 
+        /// s or sets the battlegroup name.
         /// </summary>
         [JsonProperty("name")]
         public string Name { get; set; }
