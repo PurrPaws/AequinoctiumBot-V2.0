@@ -17,9 +17,8 @@ namespace AequinoctiumBot
         public static List<UserDataSet> UserData = new List<UserDataSet>();
 
         readonly static ulong NotifyChannelID = 600385155131113497;
+        readonly static ulong LeaderboardChannelID = 602027870235131904;
         public static List<IRole> ServerRoles;
-
-
 
         public void InitializeRanks(DiscordSocketClient _client)
         {
@@ -32,6 +31,47 @@ namespace AequinoctiumBot
             ServerRoles.Add(Program.guild.Roles.FirstOrDefault(x => x.Name.ToLower() == "trial"));
             ServerRoles.Add(Program.guild.Roles.FirstOrDefault(x => x.Name.ToLower() == "soldier"));
             ServerRoles.Add(Program.guild.Roles.FirstOrDefault(x => x.Name.ToLower() == "apprentice"));
+        }
+
+        public static async Task CreateLeaderboard()
+        {
+            await (Program.guild.GetChannel(LeaderboardChannelID) as IMessageChannel).SendMessageAsync("", false, CreateLeaderboardEmbed().Build());
+        }
+        public static async Task UpdateLeaderboard()
+        {
+            await ((await (Program.guild.GetChannel(LeaderboardChannelID) as IMessageChannel).GetMessagesAsync(1).FlattenAsync()).ToList()[0] as IUserMessage).ModifyAsync(x => x.Embed = CreateLeaderboardEmbed().Build());
+        }
+
+
+        public static EmbedBuilder CreateLeaderboardEmbed()
+        {
+            EmbedBuilder embed = new EmbedBuilder()
+            {
+                Title = "Aequinoctium - Discord Profile Leaderboard",
+                Color = Color.Blue,
+                Description = "All user profiles ranked by their gained experience!",
+            };
+
+            List<UserDataSet> userDataSorted = UserData.OrderByDescending(x => x.experience).ToList();
+
+            int rank = 1;
+            foreach(UserDataSet userData in userDataSorted)
+            {
+                SocketGuildUser guildUser = Program.guild.GetUser(userData.userID);
+                if (guildUser == null) { continue; }
+                if (guildUser.Nickname != null)
+                {
+                    embed.AddField(new EmbedFieldBuilder() { Name = $"#{rank} {guildUser.Nickname}", Value = $"Lvl: `{userData.level}` | EXP: `{userData.experience}/{CalculateRequiredExp(userData.level)}` | Draks: `{userData.drak}`"});
+                }
+                else
+                {
+                    embed.AddField(new EmbedFieldBuilder() { Name = $"#{rank} {guildUser.Username}", Value = $"Lvl: `{userData.level}` | EXP: `{userData.experience}/{CalculateRequiredExp(userData.level)}` | Draks: `{userData.drak}`" });
+                }
+                rank++;
+            }
+            embed.Footer = new EmbedFooterBuilder() { Text = "Last updated: " + DateTime.Now };
+
+            return embed;
         }
 
         public static async Task SyncChar(ICommandContext _context)
@@ -83,6 +123,7 @@ namespace AequinoctiumBot
             {
                 dataSet.FirstMessageOfDay = false;
                 dataSet.FirstConnectionToVoiceOfDay = false;
+                dataSet.drakGainedThroughVoicechatTimer = 0f;
             }
             SaveUserData();
         }
@@ -302,11 +343,14 @@ namespace AequinoctiumBot
             if (isFirstVoiceConnectionOfDay) { userDataSet.FirstConnectionToVoiceOfDay = true; }
             SaveUserData();
         }
-        public static void GrantDrak(float amount, IUser user)
+        public static void GrantDrak(float amount, IUser user, bool isVoiceTimerElapsed = false)
         {
             UserDataSet userDataSet = UserData.FirstOrDefault(x => x.userID == user.Id);
             if (userDataSet == null) { Program.LogConsole("USERDATASERVICE", ConsoleColor.Red, $"GrantEXP error - userdata == null for user {user.Username} ({user.Id})"); return; };
-
+            if (isVoiceTimerElapsed)
+            {
+                if (userDataSet.drakGainedThroughVoicechatTimer >= 200) { return; }
+            }
             userDataSet.drak += amount;
             SaveUserData();
         }
@@ -377,7 +421,7 @@ namespace AequinoctiumBot
         public static void On_UserJoined(SocketGuildUser user)
         {
             UserDataSet newUserData = new UserDataSet();
-            newUserData.Initialize(user.Id, 10, 213f, 100f); //TODO: remove values when event ends!
+            newUserData.Initialize(user.Id); //TODO: remove values when event ends!
             UserData.Add(newUserData);
             SaveUserData();
         }
@@ -408,6 +452,8 @@ namespace AequinoctiumBot
 
         public static void SaveUserData()
         {
+            UpdateLeaderboard();
+
             using (FileStream stream = new FileStream(AppDomain.CurrentDomain.BaseDirectory + "UserDatabase.xml", FileMode.Create))
             {
                 XmlSerializer XML = new XmlSerializer(typeof(List<UserDataSet>));
@@ -424,6 +470,7 @@ namespace AequinoctiumBot
         public int level = 1;
         public float experience = 0;
         public float drak = 0;
+        public float drakGainedThroughVoicechatTimer = 0f;
         public List<UserCharacter> characters = new List<UserCharacter>();
         
         public DateTime LastSync;

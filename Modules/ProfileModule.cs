@@ -48,6 +48,15 @@ namespace AequinoctiumBot
         {
             await UserDataService.DenyCharacterLink(user, charactername, Context);
         }
+
+        [Command("createLeaderboard")]
+        [Summary("Denies the charlink and removes the user from pending status. \nexample: `aq deny @Bleak Rururu`\n\u200B")]
+        [RequireRole(new string[] { "King", "Ruler", "Commander" })]
+        public async Task CreateLeaderboard()
+        {
+            await UserDataService.CreateLeaderboard();
+        }
+
     }
     public class ProfileModule : ModuleBase
     {

@@ -48,19 +48,20 @@ namespace AequinoctiumBot
             Program.LogConsole("VoiceRewardTimer", ConsoleColor.Magenta, $"Elapsed -- {DateTime.Now}");
             foreach (IGuildUser user in Program.guild.Users)
             {
-                if (user.VoiceChannel != null)
+                if (user.VoiceChannel != null && user.VoiceChannel.Id != 601175267817291822)
                 {
-                    UserDataService.GrantExp(2, user);
-                    UserDataService.GrantDrak(0.5f,user);
+                    UserDataService.GrantExp(2, user,false,false);
+                    UserDataService.GrantDrak(0.5f,user,true);
                 }
             }
         }
 
         private Task OnVoiceStateUpdated(SocketUser arg1, SocketVoiceState arg2, SocketVoiceState arg3)
         {
-            if (!UserDataService.HasGottenFirstConnectionToVoiceOfDay(arg1) && arg3.VoiceChannel != null)
+            if (!UserDataService.HasGottenFirstConnectionToVoiceOfDay(arg1) && arg3.VoiceChannel != null && arg3.VoiceChannel.Id != 601175267817291822)
             {
                 UserDataService.GrantExp(20, arg1, false, true);
+                UserDataService.GrantDrak(5, arg1);
             }
             return Task.CompletedTask;
         }
@@ -113,6 +114,7 @@ namespace AequinoctiumBot
                 if (!UserDataService.HasGottenFirstMessageOfTheDay(arg.Author))
                 {
                     UserDataService.GrantExp(15, arg.Author,true);
+                    UserDataService.GrantDrak(2.5f, arg.Author);
                 }
             }
             return Task.CompletedTask;
@@ -128,12 +130,7 @@ namespace AequinoctiumBot
             {
                 Program.LogConsole("JOINLEAVEHANDLE", ConsoleColor.Cyan, $"User: {user.Username} has joined the Server.");
             }
-                
-
             UserDataService.On_UserJoined(user);
-
-            user.SendMessageAsync("Hello and welcome to Aequinoctium!\nOur Discord server has been hacked and all previous data has been lost. To accommodate for the inconvenience new members will be granted 10 levels and 100 Drak on joining.\nWe resolved the matter as quickly as possible and are sorry for the inconvenience this may have caused.\n\n*This ends Sunday 21/07/2019*\n\n**Ru.**");
-
             return Task.CompletedTask;
         }
 
