@@ -9,7 +9,7 @@ namespace AequinoctiumBot
 {
     public class AdminProfileModule : ModuleBase
     {
-        //TODO: ADD REMOVELEVEL, reset level, addlevel, remoive exp, add exp, award drak, remove drak, reset drak functions.
+        //TODO: ADD REMOVELEVEL, reset level, addlevel, remoive exp, remove drak, reset drak functions.
         [Command("removeCharLink")]
         [Summary("Removes The charlink of the specified user. \nexample: `aq removeCharLink @Bleak Himei`\n\u200B")]
         [RequireRole(new string[] { "King", "Ruler", "Commander" })]
@@ -102,6 +102,14 @@ namespace AequinoctiumBot
         public async Task SetMain([Summary("CharacterName")]string characterName)
         {
             await UserDataService.SetMain(characterName, Context);
+        }
+
+        [Command("shop")]
+        [Summary("Sets your main of all your linked characters.\nexample: `aq setMain Hikagenotora`\n\u200B")]
+        public async Task shop([Summary("CharacterName")]string characterName)
+        {
+            //TODO: add shop logic...
+            //await UserDataService.SetMain(characterName, Context);
         }
     }
 }

@@ -83,10 +83,12 @@ namespace AequinoctiumBot
         public Task Client_Ready()
         {
             var wowService = _serviceProvider.GetRequiredService<WoWService>();
-            var  userDataService = _serviceProvider.GetRequiredService<UserDataService>();
-            userDataService.LoadData();
+            var userDataService = _serviceProvider.GetRequiredService<UserDataService>();
+            var giveAwayService = _serviceProvider.GetRequiredService<GiveAwayService>();
+            userDataService.LoadUserData();
             userDataService.InitializeRanks(_client);
             wowService.Initialize();
+            giveAwayService.LoadGiveAways();
             return Task.CompletedTask;
         }
 

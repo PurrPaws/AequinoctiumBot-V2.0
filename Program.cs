@@ -35,6 +35,7 @@ namespace AequinoctiumBot
             IServiceCollection services = new ServiceCollection()
                 .AddSingleton<WoWService>()
                 .AddSingleton<UserDataService>()
+                .AddSingleton<GiveAwayService>()
                 .AddSingleton(commandService)
                 .AddSingleton(client);
             serviceProvider = services.BuildServiceProvider();

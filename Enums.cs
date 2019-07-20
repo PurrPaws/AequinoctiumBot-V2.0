@@ -24,4 +24,11 @@ namespace AequinoctiumBot
         Success,
         Failure
     }
+    public enum GiveAwayState
+    {
+        Pending,
+        Open,
+        Ended,
+        Cancelled
+    }
 }

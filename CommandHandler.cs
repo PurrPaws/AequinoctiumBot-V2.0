@@ -25,6 +25,8 @@
             _commandService.AddModuleAsync<AdminGeneralModule>(serviceProvider);
             _commandService.AddModuleAsync<ProfileModule>(serviceProvider);
             _commandService.AddModuleAsync<AdminProfileModule>(serviceProvider);
+            _commandService.AddModuleAsync<GiveAwayModule>(serviceProvider);
+            _commandService.AddModuleAsync<AdminGiveAwayModule>(serviceProvider);
             _commandService.AddModuleAsync<HelpModule>(serviceProvider);
         }
 

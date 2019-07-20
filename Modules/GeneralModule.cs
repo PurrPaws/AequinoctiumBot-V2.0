@@ -38,26 +38,26 @@ namespace AequinoctiumBot
             var messages = Context.Channel.GetMessagesAsync(amount).FlattenAsync();
             foreach (IMessage message in messages.Result) { if (message == null) { break; } await message.DeleteAsync(); }
         }
+        //TODO: remove
+        //[Command("giveAway", RunMode = RunMode.Async)]
+        //[Summary("Selects a random user that is within the General voice channel.\n\u200B")]
+        //[RequireRole(new string[] { "King", "Ruler", "Commander" })]
+        //public async Task GiveAway()
+        //{
+        //    var users = await Context.Guild.GetUsersAsync();
+        //    List<IGuildUser> possibleWinners = new List<IGuildUser>();
+        //    foreach (IGuildUser user in users)
+        //    {
+        //        if (user.RoleIds.Any(x => Context.Guild.Roles.Any(y => y.Id == x)) && user.Status != UserStatus.Offline)
+        //        {
+        //            possibleWinners.Add(user);
+        //        }
+        //    }
+        //    Random rand = new Random();
+        //    var selectedUser = possibleWinners[rand.Next(0, possibleWinners.Capacity)];
 
-        [Command("giveAway", RunMode = RunMode.Async)]
-        [Summary("Selects a random user that is within the General voice channel.\n\u200B")]
-        [RequireRole(new string[] { "King", "Ruler", "Commander" })]
-        public async Task GiveAway()
-        {
-            var users = await Context.Guild.GetUsersAsync();
-            List<IGuildUser> possibleWinners = new List<IGuildUser>();
-            foreach (IGuildUser user in users)
-            {
-                if (user.RoleIds.Any(x => Context.Guild.Roles.Any(y => y.Id == x)) && user.Status != UserStatus.Offline)
-                {
-                    possibleWinners.Add(user);
-                }
-            }
-            Random rand = new Random();
-            var selectedUser = possibleWinners[rand.Next(0, possibleWinners.Capacity)];
-
-            await Context.Channel.SendMessageAsync($"The winner of the giveaway is " + selectedUser.Mention + "! Congratulations!!");
-        }
+        //    await Context.Channel.SendMessageAsync($"The winner of the giveaway is " + selectedUser.Mention + "! Congratulations!!");
+        //}
     }
     public class GeneralModule : ModuleBase<CommandContext>
     {
@@ -82,14 +82,6 @@ namespace AequinoctiumBot
             };
             embed.Footer = new EmbedFooterBuilder { Text = "Made by: " + Context.User.Username };
             await Context.Channel.SendMessageAsync("", false, embed.Build());
-            await Context.Message.DeleteAsync();
-        }
-
-        [Command("poke")]
-        [Summary("Poke the specified user.\n\u200B")]
-        public async Task Say([Summary("@USER")] IUser user)
-        {
-            await user.SendMessageAsync("Hey! You have been poked by: " + Context.User.Username + "!!");
             await Context.Message.DeleteAsync();
         }
 

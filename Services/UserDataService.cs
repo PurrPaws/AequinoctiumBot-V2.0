@@ -15,6 +15,7 @@ namespace AequinoctiumBot
     public class UserDataService
     {
         public static List<UserDataSet> UserData = new List<UserDataSet>();
+
         readonly static ulong NotifyChannelID = 600385155131113497;
         public static List<IRole> ServerRoles;
 
@@ -83,7 +84,7 @@ namespace AequinoctiumBot
                 dataSet.FirstMessageOfDay = false;
                 dataSet.FirstConnectionToVoiceOfDay = false;
             }
-            SaveData();
+            SaveUserData();
         }
 
         public static async Task LinkCharacter(string _characterName, string _realmName, ICommandContext _context)
@@ -100,7 +101,7 @@ namespace AequinoctiumBot
             UserCharacter charToLink = new UserCharacter();
             charToLink.Initialize(_characterName, _realmName);
             userDataSet.characters.Add(charToLink);
-            SaveData();
+            SaveUserData();
 
             await _context.Channel.SendMessageAsync("A Commander has to confirm the character have requested to link is yours. The commanders have been notified and will whisper you asap. The bot will notify you with a DM once your pending status has been cleared.");
             IMessageChannel notifyChannel = Program.guild.Channels.FirstOrDefault(x => x.Id == NotifyChannelID) as IMessageChannel;
@@ -164,7 +165,7 @@ namespace AequinoctiumBot
             if (notFoundInGuild) { DmString += "Your character was not found in the guild. This could mean that the World of Warcraft API is lagging behind a bit (or you have just joined the guild), You've been granted a temporary rank. **You should use the command `aq sync` every hour untill your rank has been succesfully synchronised.**\n\n"; }
             DmString += "**Thank you for your patience and enjoy your stay!**";
             await user.SendMessageAsync(DmString);
-            SaveData();
+            SaveUserData();
         }
 
         public static async Task DenyCharacterLink(IUser user, string _charactername, ICommandContext _context)
@@ -172,7 +173,7 @@ namespace AequinoctiumBot
             UserDataSet userDataSet = UserData.FirstOrDefault(x => x.userID == user.Id);
             if (userDataSet == null) { return; }
             userDataSet.characters.Remove(userDataSet.characters.FirstOrDefault(x => x.name == _charactername));
-            SaveData();
+            SaveUserData();
             await _context.Channel.SendMessageAsync($"Successfully denied the charlink for character ´{_charactername}´. User has been notified.");
             await user.SendMessageAsync($"Unfortunetly it has been found that the character you are trying to link to named {_charactername} is not yours. Your characterlink request has been cleared. \n\nIf this truly is you character, please contact an administrator.");
         }
@@ -203,7 +204,7 @@ namespace AequinoctiumBot
             }
             userDataSet.characters.Remove(userCharacter);
             await _context.Channel.SendMessageAsync("User has been reset.");
-            SaveData();
+            SaveUserData();
         }
 
         public static async Task SetMain(string _charactername,ICommandContext _context)
@@ -247,7 +248,7 @@ namespace AequinoctiumBot
             try { await (user as IGuildUser).RemoveRolesAsync(ServerRoles); } catch { }
 
             await user.SendMessageAsync("You have been assigned a new main character. Please run `aq sync` to resynchronise to your new main.");
-            SaveData();
+            SaveUserData();
         }
 
         public static bool HasGottenFirstMessageOfTheDay(IUser user)
@@ -299,7 +300,7 @@ namespace AequinoctiumBot
             }
             if (isFirstMessageOfDay) { userDataSet.FirstMessageOfDay = true; }
             if (isFirstVoiceConnectionOfDay) { userDataSet.FirstConnectionToVoiceOfDay = true; }
-            SaveData();
+            SaveUserData();
         }
         public static void GrantDrak(float amount, IUser user)
         {
@@ -307,7 +308,7 @@ namespace AequinoctiumBot
             if (userDataSet == null) { Program.LogConsole("USERDATASERVICE", ConsoleColor.Red, $"GrantEXP error - userdata == null for user {user.Username} ({user.Id})"); return; };
 
             userDataSet.drak += amount;
-            SaveData();
+            SaveUserData();
         }
 
         public static async Task ViewProfile(IGuildUser user, ICommandContext _context) //TODO: Make embedd.
@@ -378,15 +379,15 @@ namespace AequinoctiumBot
             UserDataSet newUserData = new UserDataSet();
             newUserData.Initialize(user.Id, 10, 213f, 100f); //TODO: remove values when event ends!
             UserData.Add(newUserData);
-            SaveData();
+            SaveUserData();
         }
         public static void On_UserLeft(SocketGuildUser user)
         {
             UserData.Remove(UserData.FirstOrDefault(x => x.userID == user.Id));
-            SaveData();
+            SaveUserData();
         }
 
-        public void LoadData()
+        public void LoadUserData()
         {
             try
             {
@@ -405,7 +406,7 @@ namespace AequinoctiumBot
             }
         }
 
-        public static void SaveData()
+        public static void SaveUserData()
         {
             using (FileStream stream = new FileStream(AppDomain.CurrentDomain.BaseDirectory + "UserDatabase.xml", FileMode.Create))
             {
@@ -414,6 +415,7 @@ namespace AequinoctiumBot
             }
         }
     }
+  
     //Serializable Classes
     [Serializable]
     public class UserDataSet
