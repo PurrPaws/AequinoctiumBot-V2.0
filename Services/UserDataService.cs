@@ -477,8 +477,8 @@ namespace AequinoctiumBot
 
         public static void BackupUserData()
         {
-            Directory.CreateDirectory(AppDomain.CurrentDomain.BaseDirectory + @"\Backups\UserDataBackups\");
-            using (FileStream stream = new FileStream(AppDomain.CurrentDomain.BaseDirectory + $"/Backups/UserDataBackups/UserDataBackup {DateTime.Now.ToString("dd-MM-yy")}.xml", FileMode.Create))
+            Directory.CreateDirectory(AppDomain.CurrentDomain.BaseDirectory + @"Backups/UserDataBackups/");
+            using (FileStream stream = new FileStream(AppDomain.CurrentDomain.BaseDirectory + $"Backups/UserDataBackups/UserDataBackup {DateTime.Now.ToString("dd-MM-yy")}.xml", FileMode.Create))
             {
                 XmlSerializer XML = new XmlSerializer(typeof(List<UserDataSet>));
                 XML.Serialize(stream, UserData);
