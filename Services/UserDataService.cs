@@ -350,6 +350,7 @@ namespace AequinoctiumBot
             if (isVoiceTimerElapsed)
             {
                 if (userDataSet.drakGainedThroughVoicechatTimer >= 200) { return; }
+                userDataSet.drakGainedThroughVoicechatTimer += amount;
             }
             userDataSet.drak += amount;
             SaveUserData();
@@ -395,7 +396,7 @@ namespace AequinoctiumBot
                 Footer = new EmbedFooterBuilder() { Text = $"User Joined on {user.JoinedAt.Value.Date.ToString("dd/MM/yy")}" }
             };
 
-            embed.AddField(new EmbedFieldBuilder() { Value = $"**Level:** `{userDataSet.level}`\n**Experience:** `{Math.Truncate(100 * userDataSet.experience) / 100}/{Math.Truncate(100 * CalculateRequiredExp(userDataSet.level))/100}`\n**Draks:** `{userDataSet.drak}` Ξ\n\u200B", Name = "Profile:"});
+            embed.AddField(new EmbedFieldBuilder() { Value = $"**Level:** `{userDataSet.level}`\n**Experience:** `{Math.Truncate(100 * userDataSet.experience) / 100}/{Math.Truncate(100 * CalculateRequiredExp(userDataSet.level))/100}` (Total for level: `{CalculateRequiredExp(userDataSet.level) - CalculateRequiredExp(userDataSet.level - 1)}`)\n**Draks:** `{userDataSet.drak}` Ξ\n\u200B", Name = "Profile:"});
 
             string valueString = "";
             // 21 - NameLength= spacing
@@ -416,7 +417,20 @@ namespace AequinoctiumBot
             await _context.Channel.SendMessageAsync(null, false, embed.Build());
         }
 
+        public static async Task GiftDrak(IGuildUser user, float Amount, ICommandContext context)
+        {
+            UserDataSet gifterUserDataSet = UserData.FirstOrDefault(x => x.userID == context.User.Id);
+            if (gifterUserDataSet == null) {await context.Channel.SendMessageAsync($"An Exception occured. Could not find user: `{context.User.Id}` in the database."); return; }
+            UserDataSet receiverUserDataSet = UserData.FirstOrDefault(x => x.userID == user.Id);
+            if (receiverUserDataSet == null) { await context.Channel.SendMessageAsync($"An Exception occured. Could not find user: `{user.Id}` in the database."); return; }
 
+            if (Amount > gifterUserDataSet.drak) { await context.Channel.SendMessageAsync($"You do not have enough drak to do that."); return; }
+
+            gifterUserDataSet.drak -= Amount;
+            receiverUserDataSet.drak += Amount;
+            await context.Channel.SendMessageAsync($"You have sucessfully gifted {Amount} Ξ to {user.Nickname} and the user has been notified! How generous of you! ^-^");
+            await user.SendMessageAsync($"{user.Nickname} has gifted you {Amount} Ξ !");
+        }
 
         public static void On_UserJoined(SocketGuildUser user)
         {
@@ -431,7 +445,7 @@ namespace AequinoctiumBot
             SaveUserData();
         }
 
-        public void LoadUserData()
+        public static void LoadUserData()
         {
             try
             {
@@ -460,6 +474,16 @@ namespace AequinoctiumBot
                 XML.Serialize(stream, UserData);
             }
         }
+
+        public static void BackupUserData()
+        {
+            using (FileStream stream = new FileStream(AppDomain.CurrentDomain.BaseDirectory + $"/Backups/UserDataBackups/UserDataBackup {DateTime.Now.ToString("dd/MM/yy")}.xml", FileMode.Create))
+            {
+                XmlSerializer XML = new XmlSerializer(typeof(List<UserDataSet>));
+                XML.Serialize(stream, UserData);
+            }
+        }
+
     }
   
     //Serializable Classes

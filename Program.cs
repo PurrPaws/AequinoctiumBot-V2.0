@@ -50,7 +50,30 @@ namespace AequinoctiumBot
             await client.StartAsync();
             await client.SetGameAsync("Aequinoctium");
 
-            await Task.Delay(-1); //Keep this task from ever shutting down.
+            while (true)
+            {
+                string command = Console.ReadLine();
+
+                switch (command.ToLower())
+                {
+                    case "backup":
+                        UserDataService.BackupUserData();
+                        GiveAwayService.BackupGiveAways();
+                        break;
+                    case "save":
+                        UserDataService.SaveUserData();
+                        GiveAwayService.SaveGiveAways();
+                        break;
+                    case "load":
+                        UserDataService.LoadUserData();
+                        GiveAwayService.LoadGiveAways();
+                        break;
+                    case "stop":
+                        UserDataService.SaveUserData();
+                        GiveAwayService.SaveGiveAways();
+                        return;
+                }
+            }
         }
         #region HelperFunctions
         public static void LogConsole(string _prefix, ConsoleColor _prefixColor, string logText)
@@ -61,5 +84,22 @@ namespace AequinoctiumBot
             Console.WriteLine(logText);
         }
         #endregion HelperFunctions
+    }
+
+    public static class ExtentionMethods
+    {
+        public static void Shuffle<T>(this IList<T> list)
+        {
+            Random rng = new Random();
+            int n = list.Count;
+            while (n > 1)
+            {
+                n--;
+                int k = rng.Next(n + 1);
+                T value = list[k];
+                list[k] = list[n];
+                list[n] = value;
+            }
+        }
     }
 }

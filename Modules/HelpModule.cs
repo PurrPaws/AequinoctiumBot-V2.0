@@ -67,7 +67,7 @@ namespace AequinoctiumBot
         }
 
         [Command("helpAdmin")]
-        [RequireRole(new string[] { "King","Ruler", "Commander"})]
+        [RequireRole(new string[] { "King", "Commander"})]
         [Summary("Lists this bot's Admin commands.")]
         public async Task HelpAdmin([Summary("Module")]string ModuleText = "")
         {
@@ -109,7 +109,7 @@ namespace AequinoctiumBot
 
             output.Footer = new EmbedFooterBuilder
             {
-                Text = "Use 'help <module>' to get help with a module."
+                Text = "Use 'help MODULENAME' to get help with a module."
             };
             await ReplyAsync("", embed: output.Build());
         }
@@ -120,7 +120,7 @@ namespace AequinoctiumBot
         {
             if (ModuleText != "")
             {
-                var Module = _commands.Modules.FirstOrDefault(x => x.Name == ModuleText && !x.Name.Contains("Admin"));
+                var Module = _commands.Modules.FirstOrDefault(x => x.Name.ToLower().Contains(ModuleText.ToLower()) && !x.Name.Contains("Admin"));
                 if (Module != null)
                 {
                     string prefixstring = Module.Group != "" ? (Program.prefixString + Module.Group) : "N/A";
@@ -155,7 +155,7 @@ namespace AequinoctiumBot
 
             output.Footer = new EmbedFooterBuilder
             {
-                Text = "Use 'help <module>' to get help with a module."
+                Text = "Use 'help MODULENAME' to get help with a module."
             };
             await ReplyAsync("", embed: output.Build());
         }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.IO;
 
 namespace AequinoctiumBot
 {
@@ -69,6 +70,10 @@ namespace AequinoctiumBot
         private void On_MidnightTimer(object sender, ElapsedEventArgs e)
         {
             UserDataService.On_MidnightTimer();
+            UserDataService.BackupUserData();
+            GiveAwayService.BackupGiveAways();
+            CleanBackups();
+
             midnightTimer = new Timer((DateTime.Today.AddDays(1) - DateTime.Now).TotalMilliseconds);
             midnightTimer.AutoReset = false;
             midnightTimer.Elapsed += On_MidnightTimer;
@@ -85,11 +90,10 @@ namespace AequinoctiumBot
         {
             var wowService = _serviceProvider.GetRequiredService<WoWService>();
             var userDataService = _serviceProvider.GetRequiredService<UserDataService>();
-            var giveAwayService = _serviceProvider.GetRequiredService<GiveAwayService>();
-            userDataService.LoadUserData();
+            UserDataService.LoadUserData();
             userDataService.InitializeRanks(_client);
             wowService.Initialize();
-            giveAwayService.LoadGiveAways();
+            GiveAwayService.LoadGiveAways();
             return Task.CompletedTask;
         }
 
@@ -143,6 +147,19 @@ namespace AequinoctiumBot
 
             UserDataService.On_UserLeft(user);
 
+            return Task.CompletedTask;
+        }
+
+        Task CleanBackups()
+        {
+            if (File.Exists(AppDomain.CurrentDomain.BaseDirectory + $"/Backups/UserDataBackups/UserDataBackup {DateTime.Now.AddDays(-7).ToString("dd/MM/yy")}.xml"))
+            {
+                File.Delete(AppDomain.CurrentDomain.BaseDirectory + $"/Backups/UserDataBackups/UserDataBackup {DateTime.Now.AddDays(-7).ToString("dd/MM/yy")}.xml");
+            }
+            if (File.Exists(AppDomain.CurrentDomain.BaseDirectory + $"/Backups/GiveAwayBackups/GiveAwayBackup {DateTime.Now.AddDays(-7).ToString("dd/MM/yy")}.xml"))
+            {
+                File.Delete(AppDomain.CurrentDomain.BaseDirectory + $"/Backups/GiveAwayBackups/GiveAwayBackup {DateTime.Now.AddDays(-7).ToString("dd/MM/yy")}.xml");
+            }
             return Task.CompletedTask;
         }
     }

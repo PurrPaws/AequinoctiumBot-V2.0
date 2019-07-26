@@ -82,6 +82,7 @@ namespace AequinoctiumBot
                 TicketData ticketData = giveAway.tickets.FirstOrDefault(x => x.userDataSet.userID == userDataSet.userID);
                 ticketData.userDataSet = userDataSet;
                 ticketData.ticketAmount += amountToBuy;
+                context.Channel.SendMessageAsync("Tickets have been successfully bought!");
             }
             else
             {
@@ -92,6 +93,7 @@ namespace AequinoctiumBot
                 ticketData.ticketAmount += amountToBuy;
 
                 giveAway.tickets.Add(ticketData);
+                context.Channel.SendMessageAsync("Tickets have been successfully bought!");
             }
             UserDataService.SaveUserData();
             SaveGiveAways();
@@ -130,16 +132,54 @@ namespace AequinoctiumBot
             embed.AddField(new EmbedFieldBuilder() { Name = "Reward:", Value = newGiveAway.giveAwayItemString });
             embed.AddField(new EmbedFieldBuilder() { Name = "Status:", Value = statusString });
             embed.AddField(new EmbedFieldBuilder() { Name = "Entries:", Value = newGiveAway.GetTotalTickets() });
-            embed.AddField(new EmbedFieldBuilder() { Name = "End Date:", Value = newGiveAway.endDateTime.Date });
-            embed.Footer = new EmbedFooterBuilder() { Text = "Giveaway created: " + newGiveAway.openDateTime.Date };
+            embed.AddField(new EmbedFieldBuilder() { Name = "End Date:", Value = newGiveAway.endDateTime.Date.ToString("dd/MM/yy") });
+
+            if (newGiveAway.winner != null)
+            {
+                embed.AddField(new EmbedFieldBuilder() { Name = "__Winner:__", Value = "**" + Program.guild.GetUser(newGiveAway.winner.userID).Mention+ "**" });
+            }
+            
+
+            embed.Footer = new EmbedFooterBuilder() { Text = "Giveaway created: " + newGiveAway.openDateTime.Date.ToString("dd/MM/yy") };
 
             return embed;
         }
+        public static void getTickets(int GiveAwayID,ICommandContext context)
+        {
+            GiveAway giveAway = GiveAways[GiveAwayID - 1];
+            int amount = 0;
+            amount = giveAway.tickets.FirstOrDefault(x => x.userDataSet.userID == context.User.Id).ticketAmount;
+            context.Channel.SendMessageAsync($"You own {amount} Tickets of the pool of {giveAway.GetTotalTickets()} Tickets.");
+        }
+        public static void EndGiveAway(int giveAwayID)
+        {
+            GiveAway giveAway = GiveAways[giveAwayID - 1];
+
+            List<UserDataSet> PossibleWinners = new List<UserDataSet>();
+
+            foreach(TicketData ticket in giveAway.tickets)
+            {
+                for(int i = 0; i < ticket.ticketAmount; i++)
+                {
+                    PossibleWinners.Add(ticket.userDataSet);
+                }
+            }
+
+            ExtentionMethods.Shuffle(PossibleWinners);
+
+            Random WinnerSelector = new Random();
+
+            giveAway.winner = PossibleWinners[WinnerSelector.Next(0, PossibleWinners.Count)];
+
+            giveAway.state = GiveAwayState.Ended;
+            UpdateGiveAwayMessage(giveAway);
+        }
+
         public static void UpdateGiveAwayMessage(GiveAway giveAway)
         {
             ((Program.guild.GetChannel(giveawayChannelID) as IMessageChannel).GetMessageAsync(giveAway.giveAwayMessageId).Result as IUserMessage).ModifyAsync(x => x.Embed = CreateMessageEmbed(giveAway).Build());
         }
-        public void LoadGiveAways()
+        public static void LoadGiveAways()
         {
             try
             {
@@ -161,6 +201,15 @@ namespace AequinoctiumBot
         public static void SaveGiveAways()
         {
             using (FileStream stream = new FileStream(AppDomain.CurrentDomain.BaseDirectory + "GiveAwayDatabase.xml", FileMode.Create))
+            {
+                XmlSerializer XML = new XmlSerializer(typeof(List<GiveAway>));
+                XML.Serialize(stream, GiveAways);
+            }
+        }
+
+        public static void BackupGiveAways()
+        {
+            using (FileStream stream = new FileStream(AppDomain.CurrentDomain.BaseDirectory + $"/Backups/GiveAwayBackups/GiveAwayBackup {DateTime.Now.ToString("dd/MM/yy")}.xml", FileMode.Create))
             {
                 XmlSerializer XML = new XmlSerializer(typeof(List<GiveAway>));
                 XML.Serialize(stream, GiveAways);
