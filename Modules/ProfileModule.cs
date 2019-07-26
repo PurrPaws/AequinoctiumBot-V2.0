@@ -125,7 +125,7 @@ namespace AequinoctiumBot
         [Summary("Gifts x amount of drak to another user!\nexample: `aq giftDrak @Rururu 20`\n\u200B")]
         public async Task GiftDrak([Summary("CharacterName")]IGuildUser user, [Summary("Amount of Drak")]float Amount)
         {
-            UserDataService.GiftDrak(user, Amount, Context);
+            await UserDataService.GiftDrak(user, Amount, Context);
         }
     }
 }
