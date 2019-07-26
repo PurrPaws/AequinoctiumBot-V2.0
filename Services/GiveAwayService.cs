@@ -209,8 +209,8 @@ namespace AequinoctiumBot
 
         public static void BackupGiveAways()
         {
-            Directory.CreateDirectory(AppDomain.CurrentDomain.BaseDirectory + $"/Backups/GiveAwayBackups/");
-            using (FileStream stream = new FileStream(AppDomain.CurrentDomain.BaseDirectory + $"/Backups/GiveAwayBackups/GiveAwayBackup {DateTime.Now.ToString("dd/MM/yy")}.xml", FileMode.Create))
+            Directory.CreateDirectory(AppDomain.CurrentDomain.BaseDirectory + @"\Backups\GiveAwayBackups\");
+            using (FileStream stream = new FileStream(AppDomain.CurrentDomain.BaseDirectory + $"/Backups/GiveAwayBackups/GiveAwayBackup {DateTime.Now.ToString("dd-MM-yy")}.xml", FileMode.Create))
             {
                 XmlSerializer XML = new XmlSerializer(typeof(List<GiveAway>));
                 XML.Serialize(stream, GiveAways);

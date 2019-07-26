@@ -152,13 +152,13 @@ namespace AequinoctiumBot
 
         Task CleanBackups()
         {
-            if (File.Exists(AppDomain.CurrentDomain.BaseDirectory + $"/Backups/UserDataBackups/UserDataBackup {DateTime.Now.AddDays(-7).ToString("dd/MM/yy")}.xml"))
+            if (File.Exists(AppDomain.CurrentDomain.BaseDirectory + $"/Backups/UserDataBackups/UserDataBackup {DateTime.Now.AddDays(-7).ToString("dd-MM-yy")}.xml"))
             {
-                File.Delete(AppDomain.CurrentDomain.BaseDirectory + $"/Backups/UserDataBackups/UserDataBackup {DateTime.Now.AddDays(-7).ToString("dd/MM/yy")}.xml");
+                File.Delete(AppDomain.CurrentDomain.BaseDirectory + $"/Backups/UserDataBackups/UserDataBackup {DateTime.Now.AddDays(-7).ToString("dd-MM-yy")}.xml");
             }
-            if (File.Exists(AppDomain.CurrentDomain.BaseDirectory + $"/Backups/GiveAwayBackups/GiveAwayBackup {DateTime.Now.AddDays(-7).ToString("dd/MM/yy")}.xml"))
+            if (File.Exists(AppDomain.CurrentDomain.BaseDirectory + $"/Backups/GiveAwayBackups/GiveAwayBackup {DateTime.Now.AddDays(-7).ToString("dd-MM-yy")}.xml"))
             {
-                File.Delete(AppDomain.CurrentDomain.BaseDirectory + $"/Backups/GiveAwayBackups/GiveAwayBackup {DateTime.Now.AddDays(-7).ToString("dd/MM/yy")}.xml");
+                File.Delete(AppDomain.CurrentDomain.BaseDirectory + $"/Backups/GiveAwayBackups/GiveAwayBackup {DateTime.Now.AddDays(-7).ToString("dd-MM-yy")}.xml");
             }
             return Task.CompletedTask;
         }
