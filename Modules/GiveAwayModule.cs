@@ -14,16 +14,23 @@ namespace AequinoctiumBot
         [Command("giveaway create")]
         [RequireRole(new string[] { "King", "Commander" })]
         [Summary("Create a giveaway\n\u200B")]
-        public async Task CreateGiveAway([Summary("GiveAway Item")] string itemString, [Summary("endsInDays")] int endsInDays, [Summary("entryCost")] float entryCost = 10f)
+        public async Task CreateGiveAway([Summary("endsInDays")] int endsInDays, [Summary("entryCost")] int entryCost, params string[] rewards)
         {
-            GiveAwayService.CreateGiveAway(itemString,entryCost,endsInDays);
+            GiveAwayService.CreateGiveAway(entryCost, endsInDays, rewards);
+        }
+        [Command("giveaway addReward")]
+        [RequireRole(new string[] { "King", "Commander" })]
+        [Summary("adds a reward to the giveaway\n\u200B")]
+        public async Task AddReward([Summary("ID")] int giveawayID, [Summary("Reward")] string reward)
+        {
+            GiveAwayService.AddReward(giveawayID, reward);
         }
         [Command("giveaway setStatus")]
         [RequireRole(new string[] { "King", "Commander" })]
         [Summary("Open a giveaway\n\u200B")]
         public async Task SetGiveawayStatus([Summary("GiveAwayID")] int giveAwayID, string status)
         {
-            GiveAwayService.SetGiveawayStatus(giveAwayID,status);
+            GiveAwayService.SetGiveawayStatus(giveAwayID, status);
         }
 
         [Command("giveaway end")]

@@ -18,12 +18,18 @@ namespace AequinoctiumBot
         public static List<GiveAway> GiveAways = new List<GiveAway>();
         public readonly static ulong giveawayChannelID = 601771906126970880;
 
-        public static void CreateGiveAway(string rewardString, float entryCost, int endsInDays)
+        public static void CreateGiveAway(float entryCost, int endsInDays, string[] rewardStrings)
         {
             GiveAway newGiveAway = new GiveAway();
 
             newGiveAway.id = GiveAways.Count()+1;
-            newGiveAway.giveAwayItemString = rewardString;
+            foreach(string rewardString in rewardStrings)
+            {
+                GiveAwayReward reward = new GiveAwayReward();
+                reward.rewardString = rewardString;
+                reward.winner = null;
+                newGiveAway.rewards.Add(reward);
+            }
             newGiveAway.ticketEntryCost = entryCost;
             newGiveAway.endDateTime = DateTime.Now.AddDays(endsInDays);
 
@@ -56,6 +62,16 @@ namespace AequinoctiumBot
 
             UpdateGiveAwayMessage(GiveAways[id - 1]);
             SaveGiveAways();
+        }
+        public static void AddReward(int id, string rewardString)
+        {
+            if (rewardString.Length > 0)
+            {
+                GiveAways[id - 1].rewards.Add(new GiveAwayReward() { rewardString = rewardString, winner = null });
+
+                UpdateGiveAwayMessage(GiveAways[id - 1]);
+                SaveGiveAways();
+            }
         }
         public static void BuyTickets(ICommandContext context,int id, int amountToBuy)
         {
@@ -129,16 +145,22 @@ namespace AequinoctiumBot
                 Title = $"GiveAway #{newGiveAway.id}"
             };
             embed.AddField(new EmbedFieldBuilder() { Name = "Ticket Cost:", Value = newGiveAway.ticketEntryCost + " Ξ" });
-            embed.AddField(new EmbedFieldBuilder() { Name = "Reward:", Value = newGiveAway.giveAwayItemString });
-            embed.AddField(new EmbedFieldBuilder() { Name = "Status:", Value = statusString });
-            embed.AddField(new EmbedFieldBuilder() { Name = "Entries:", Value = newGiveAway.GetTotalTickets() });
-            embed.AddField(new EmbedFieldBuilder() { Name = "End Date:", Value = newGiveAway.endDateTime.Date.ToString("dd/MM/yy") });
-
-            if (newGiveAway.winner != null)
+            embed.AddField(new EmbedFieldBuilder() { Name = "\u200B", Value = "\u200B" });
+            embed.AddField(new EmbedFieldBuilder() { Name = "**Rewards:**", Value = "\u200B" });
+            embed.AddField(new EmbedFieldBuilder() { Name = "\u200B", Value = "\u200B" });
+            int rewardIndex = 1;
+            foreach(GiveAwayReward reward in newGiveAway.rewards)
             {
-                embed.AddField(new EmbedFieldBuilder() { Name = "__Winner:__", Value = "**" + Program.guild.GetUser(newGiveAway.winner.userID).Mention+ "**" });
+                string valueString = reward.rewardString;
+                if (reward.winner != null) { valueString += $" - **Winner: {Program.guild.GetUser(reward.winner.userID).Mention}**"; }
+                embed.AddField(new EmbedFieldBuilder() { Name = $"Reward {rewardIndex}:", Value = valueString });
+                rewardIndex++;
             }
-            
+            embed.AddField(new EmbedFieldBuilder() { Name = "\u200B", Value = "\u200B" });
+
+            embed.AddField(new EmbedFieldBuilder() { Name = "Status:", Value = statusString });
+            embed.AddField(new EmbedFieldBuilder() { Name = "Total Entries:", Value = newGiveAway.GetTotalTickets() });
+            embed.AddField(new EmbedFieldBuilder() { Name = "End Date:", Value = newGiveAway.endDateTime.Date.ToString("dd/MM/yy") });
 
             embed.Footer = new EmbedFooterBuilder() { Text = "Giveaway created: " + newGiveAway.openDateTime.Date.ToString("dd/MM/yy") };
 
@@ -155,21 +177,23 @@ namespace AequinoctiumBot
         {
             GiveAway giveAway = GiveAways[giveAwayID - 1];
 
-            List<UserDataSet> PossibleWinners = new List<UserDataSet>();
+            List<UserDataSet> ticketPool = new List<UserDataSet>();
 
             foreach(TicketData ticket in giveAway.tickets)
             {
                 for(int i = 0; i < ticket.ticketAmount; i++)
                 {
-                    PossibleWinners.Add(ticket.userDataSet);
+                    ticketPool.Add(ticket.userDataSet);
                 }
             }
+            ExtentionMethods.Shuffle(ticketPool);
 
-            ExtentionMethods.Shuffle(PossibleWinners);
-
-            Random WinnerSelector = new Random();
-
-            giveAway.winner = PossibleWinners[WinnerSelector.Next(0, PossibleWinners.Count)];
+            foreach(GiveAwayReward reward in giveAway.rewards)
+            {
+                Random WinnerSelector = new Random();
+                reward.winner = ticketPool[WinnerSelector.Next(0, ticketPool.Count)];
+                ticketPool.Remove(reward.winner);
+            }
 
             giveAway.state = GiveAwayState.Ended;
             UpdateGiveAwayMessage(giveAway);
@@ -222,12 +246,11 @@ namespace AequinoctiumBot
     public class GiveAway
     {
         public int id;
-        public string giveAwayItemString;
+        public List<GiveAwayReward> rewards = new List<GiveAwayReward>();
         public ulong giveAwayMessageId;
         public float ticketEntryCost = 10f;
         public DateTime openDateTime = DateTime.Now;
         public DateTime endDateTime;
-        public UserDataSet winner = null;
         public List<TicketData> tickets = new List<TicketData>();
         public GiveAwayState state = GiveAwayState.Pending;
 
@@ -242,5 +265,11 @@ namespace AequinoctiumBot
     {
         public UserDataSet userDataSet;
         public int ticketAmount = 0;
+    }
+    [Serializable]
+    public class GiveAwayReward
+    {
+        public UserDataSet winner;
+        public string rewardString;
     }
 }
