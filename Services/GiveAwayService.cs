@@ -146,8 +146,7 @@ namespace AequinoctiumBot
             };
             embed.AddField(new EmbedFieldBuilder() { Name = "Ticket Cost:", Value = newGiveAway.ticketEntryCost + " Ξ" });
             embed.AddField(new EmbedFieldBuilder() { Name = "\u200B", Value = "\u200B" });
-            embed.AddField(new EmbedFieldBuilder() { Name = "**Rewards:**", Value = "\u200B" });
-            embed.AddField(new EmbedFieldBuilder() { Name = "\u200B", Value = "\u200B" });
+            embed.AddField(new EmbedFieldBuilder() { Name = "__**Rewards:**__", Value = "\u200B" });
             int rewardIndex = 1;
             foreach(GiveAwayReward reward in newGiveAway.rewards)
             {
